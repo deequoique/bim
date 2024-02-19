@@ -1,5 +1,6 @@
 package edu.hitsz.bim.service;
 
+import edu.hitsz.bim.domain.dto.CreateUserReq;
 import edu.hitsz.bim.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface UserService extends IService<User> {
 
+    Boolean create(CreateUserReq req);
 }

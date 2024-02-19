@@ -1,7 +1,11 @@
 package edu.hitsz.bim.service;
 
+import edu.hitsz.bim.domain.dto.CreateProjectReq;
+import edu.hitsz.bim.domain.vo.ProjectVO;
 import edu.hitsz.bim.entity.Project;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +17,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ProjectService extends IService<Project> {
 
+    List<Project> findByUser(String userId);
+
+    Boolean create(CreateProjectReq req);
+
+    ProjectVO details(String id);
+
+    Boolean delete(String id);
 }

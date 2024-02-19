@@ -1,5 +1,6 @@
 package edu.hitsz.bim.serviceImpl;
 
+import edu.hitsz.bim.domain.dto.CreateGlassReq;
 import edu.hitsz.bim.entity.Glass;
 import edu.hitsz.bim.mappers.GlassMapper;
 import edu.hitsz.bim.service.GlassService;
@@ -17,4 +18,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class GlassServiceImpl extends ServiceImpl<GlassMapper, Glass> implements GlassService {
 
+    @Override
+    public Boolean create(CreateGlassReq req) {
+        return null;
+    }
 }

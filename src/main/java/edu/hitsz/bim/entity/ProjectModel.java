@@ -7,8 +7,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("project_model")
-@ApiModel(value = "ProjectModel对象", description = "Table for storing project models")
+@Schema(description = "Table for storing project models")
 public class ProjectModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,19 +31,15 @@ public class ProjectModel implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty("Identifier for the project")
     @TableField("project_id")
     private Integer projectId;
 
-    @ApiModelProperty("Model associated with the project")
     @TableField("model")
     private String model;
 
-    @ApiModelProperty("Time when the project model was created")
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private Date createTime;
 
-    @ApiModelProperty("Time when the project model was last updated")
     @TableField("update_time")
     private Date updateTime;
 

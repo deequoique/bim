@@ -7,8 +7,6 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +21,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("user")
-@ApiModel(value = "User对象", description = "Table for storing user information")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,19 +28,15 @@ public class User implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty("Name of the user")
     @TableField("name")
     private String name;
 
-    @ApiModelProperty("Password of the user")
     @TableField("password")
     private String password;
 
-    @ApiModelProperty("Time when the user was created")
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private Date createTime;
 
-    @ApiModelProperty("Time when the user was last updated")
     @TableField("update_time")
     private Date updateTime;
 

@@ -7,8 +7,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("project")
-@ApiModel(value = "Project对象", description = "Table for storing project information")
+@Schema(description = "Table for storing project information")
 public class Project implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,23 +31,23 @@ public class Project implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty("Name of the project")
+    @Schema(description ="Name of the project")
     @TableField("name")
     private String name;
 
-    @ApiModelProperty("Identifier for the user associated with the project")
+    @Schema(description ="Identifier for the user associated with the project")
     @TableField("user_id")
     private Integer userId;
 
-    @ApiModelProperty("Security level of the project")
+    @Schema(description ="Security level of the project")
     @TableField("security")
     private String security;
 
-    @ApiModelProperty("Time when the project was created")
+    @Schema(description ="Time when the project was created")
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private Date createTime;
 
-    @ApiModelProperty("Time when the project was last updated")
+    @Schema(description ="Time when the project was last updated")
     @TableField("update_time")
     private Date updateTime;
 

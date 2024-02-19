@@ -1,7 +1,10 @@
 package edu.hitsz.bim.service;
 
+import edu.hitsz.bim.domain.dto.CreateRecordReq;
 import edu.hitsz.bim.entity.Record;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface RecordService extends IService<Record> {
 
+    Boolean create(CreateRecordReq req);
+
+    List<Record> lists(String projectId);
+
+    Boolean delete(String id);
 }

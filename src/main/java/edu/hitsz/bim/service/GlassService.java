@@ -1,5 +1,6 @@
 package edu.hitsz.bim.service;
 
+import edu.hitsz.bim.domain.dto.CreateGlassReq;
 import edu.hitsz.bim.entity.Glass;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -12,5 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2024-02-02 01:47:27
  */
 public interface GlassService extends IService<Glass> {
-
+    Boolean create(CreateGlassReq req);
 }
