@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,6 +21,7 @@ import lombok.Setter;
  * @author lane
  * @since 2024-02-02 01:47:27
  */
+@Builder
 @Getter
 @Setter
 @TableName("glass")

@@ -4,6 +4,8 @@ import edu.hitsz.bim.domain.dto.CreateGlassReq;
 import edu.hitsz.bim.entity.Glass;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * Table for storing glass information 服务类
@@ -14,4 +16,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface GlassService extends IService<Glass> {
     Boolean create(CreateGlassReq req);
+
+    List<Glass> getList(String projectId);
+
+    Boolean delete(String id);
 }

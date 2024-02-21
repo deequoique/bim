@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
+
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,6 +20,7 @@ import lombok.Setter;
  * @author lane
  * @since 2024-02-02 01:47:27
  */
+@Builder
 @Getter
 @Setter
 @TableName("record")
@@ -31,11 +34,14 @@ public class Record implements Serializable {
     @TableField("context")
     private String context;
 
+    @TableField("project_id")
+    private Integer projectId;
+
     @TableField("result")
     private String result;
 
     @TableField("time")
-    private Date time;
+    private String time;
 
     @TableField("staff")
     private String staff;

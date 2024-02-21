@@ -10,9 +10,12 @@ import edu.hitsz.bim.service.RecordService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.List;
 
 /**
  * <p>
@@ -38,6 +41,16 @@ public class GlassController extends BaseController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public Response<Boolean> create(CreateGlassReq req) {
         return dealWithException(req, glassService::create, "RecordController");
+    }
+
+    @RequestMapping(value = "/list/{project_id}", method = RequestMethod.GET)
+    public Response<List<Glass>> getList(@PathVariable String project_id) {
+        return dealWithException(project_id, glassService::getList, "RecordController");
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public Response<Boolean> delete(@PathVariable String id) {
+        return dealWithException(id, glassService::delete, "RecordController");
     }
 
 }

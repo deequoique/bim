@@ -11,4 +11,11 @@ import lombok.Data;
 @Data
 @Builder
 public class CreateGlassReq {
+    private String project_id;
+    private String name;
+    private String area;
+    private String thickness;
+    private String strength;
+    private String configuration;
+    private String manufacturer;
 }
