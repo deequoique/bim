@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
+
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,6 +20,7 @@ import lombok.Setter;
  * @author lane
  * @since 2024-02-02 01:32:10
  */
+@Builder
 @Getter
 @Setter
 @TableName("user")

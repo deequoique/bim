@@ -1,5 +1,6 @@
 package edu.hitsz.bim.config;
 
+import edu.hitsz.bim.config.security.*;
 import edu.hitsz.bim.serviceImpl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -8,14 +9,12 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity(debug = false)
 public class SecurityConfig {
 
     @Autowired
@@ -29,16 +28,21 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginProcessingUrl("/login")
-                        .permitAll()
-                )
+                        .successHandler(new JsonAuthenticationSuccessHandler())
+                        .failureHandler(new JsonAuthenticationFailureHandler()))
                 .httpBasic(AbstractHttpConfigurer::disable)
-                // 添加JWT过滤器
-                .addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-                .logout(LogoutConfigurer::permitAll);
+                .logout(logout -> logout
+                        .logoutSuccessHandler(new JsonLogoutSuccessHandler()))
+                .exceptionHandling(h -> h
+                        .accessDeniedHandler(new JsonAccessDeniedHandler())
+                        .authenticationEntryPoint(new JsonAuthenticationEntryPoint()));
         return http.build();
     }
 
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

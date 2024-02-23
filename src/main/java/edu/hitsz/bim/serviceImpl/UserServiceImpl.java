@@ -5,6 +5,7 @@ import edu.hitsz.bim.entity.User;
 import edu.hitsz.bim.mappers.UserMapper;
 import edu.hitsz.bim.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,6 +21,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public Boolean create(CreateUserReq req) {
-        return null;
+        User u = User.builder().name(req.getUsername())
+                .password(new BCryptPasswordEncoder().encode(req.getPassword()))
+                .build();
+        return this.save(u);
     }
 }
