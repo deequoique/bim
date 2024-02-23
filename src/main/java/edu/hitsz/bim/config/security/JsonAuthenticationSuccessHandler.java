@@ -1,5 +1,6 @@
 package edu.hitsz.bim.config.security;
 
+import edu.hitsz.bim.common.R;
 import edu.hitsz.bim.common.Response;
 import edu.hitsz.bim.common.ResponseUtils;
 import jakarta.servlet.ServletException;
@@ -20,6 +21,6 @@ public class JsonAuthenticationSuccessHandler implements AuthenticationSuccessHa
      */
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
-        ResponseUtils.buildResponse(response, Response.SUCCEED(), HttpStatus.OK);
+        ResponseUtils.buildResponse(response, R.success(), HttpStatus.OK);
     }
 }

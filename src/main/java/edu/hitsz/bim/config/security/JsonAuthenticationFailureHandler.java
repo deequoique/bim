@@ -1,6 +1,8 @@
 package edu.hitsz.bim.config.security;
 
+import edu.hitsz.bim.common.R;
 import edu.hitsz.bim.common.Response;
+import edu.hitsz.bim.common.ResponseEnum;
 import edu.hitsz.bim.common.ResponseUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,6 +16,6 @@ import java.io.IOException;
 public class JsonAuthenticationFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
-        ResponseUtils.buildResponse(response, Response.UNAUTHORIZED(), HttpStatus.UNAUTHORIZED);
+        ResponseUtils.buildResponse(response, R.response(ResponseEnum.UNAUTHORIZED,null), HttpStatus.UNAUTHORIZED);
     }
 }

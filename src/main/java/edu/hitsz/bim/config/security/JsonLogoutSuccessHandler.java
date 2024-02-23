@@ -1,5 +1,6 @@
 package edu.hitsz.bim.config.security;
 
+import edu.hitsz.bim.common.R;
 import edu.hitsz.bim.common.Response;
 import edu.hitsz.bim.common.ResponseUtils;
 import jakarta.servlet.ServletException;
@@ -15,6 +16,6 @@ public class JsonLogoutSuccessHandler implements LogoutSuccessHandler {
 
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        ResponseUtils.buildResponse(response, Response.SUCCEED(), HttpStatus.OK);
+        ResponseUtils.buildResponse(response, R.success(), HttpStatus.OK);
     }
 }
