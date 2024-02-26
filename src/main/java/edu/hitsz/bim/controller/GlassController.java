@@ -25,7 +25,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@RequestMapping("/glass")
+@RequestMapping("/api/glass")
 public class GlassController extends BaseController {
 
     @Resource

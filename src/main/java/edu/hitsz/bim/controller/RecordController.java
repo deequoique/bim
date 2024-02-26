@@ -23,7 +23,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@RequestMapping("/record")
+@RequestMapping("/api/record")
 public class RecordController extends BaseController {
 
     @Resource

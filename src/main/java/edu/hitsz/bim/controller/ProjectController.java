@@ -25,7 +25,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@RequestMapping("/project")
+@RequestMapping("/api/project")
 public class ProjectController extends BaseController {
     @Resource
     private ProjectService projectService;
