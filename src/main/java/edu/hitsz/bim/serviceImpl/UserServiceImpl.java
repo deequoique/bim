@@ -1,5 +1,6 @@
 package edu.hitsz.bim.serviceImpl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import edu.hitsz.bim.common.BIMException;
 import edu.hitsz.bim.common.ResponseEnum;
 import edu.hitsz.bim.domain.dto.CreateUserReq;
@@ -28,6 +29,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         if (Objects.isNull(req.getPassword())) {
             throw BIMException.build(ResponseEnum.ERROR);
+        }
+
+        User one = this.getOne(new LambdaQueryWrapper<User>().eq(User::getName, req.getUsername()));
+        if (Objects.nonNull(one)) {
+            throw BIMException.build(ResponseEnum.DUPLICATE);
         }
         User u = User.builder().name(req.getUsername())
                 .password(new BCryptPasswordEncoder().encode(req.getPassword()))
