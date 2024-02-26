@@ -8,10 +8,8 @@ import edu.hitsz.bim.service.RecordService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
@@ -24,7 +22,7 @@ import java.util.List;
  * @since 2024-02-02 01:47:27
  */
 @Slf4j
-@Controller
+@RestController
 @RequestMapping("/record")
 public class RecordController extends BaseController {
 
@@ -37,7 +35,7 @@ public class RecordController extends BaseController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public Response<Boolean> create(CreateRecordReq req) {
+    public Response<Boolean> create(@RequestBody CreateRecordReq req) {
         return dealWithException(req, recordService::create, "RecordController");
     }
 
