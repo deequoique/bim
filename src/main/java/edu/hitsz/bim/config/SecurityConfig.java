@@ -28,6 +28,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
+                        .loginProcessingUrl("/api/login")
                         .successHandler(new JsonAuthenticationSuccessHandler())
                         .failureHandler(new JsonAuthenticationFailureHandler()))
                 .httpBasic(AbstractHttpConfigurer::disable)
