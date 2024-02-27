@@ -39,7 +39,7 @@ public class Project implements Serializable {
 
     @Schema(description ="Identifier for the user associated with the project")
     @TableField("user_id")
-    private Integer userId;
+    private String userId;
 
     @Schema(description ="Security level of the project")
     @TableField("security")
