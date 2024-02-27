@@ -44,7 +44,7 @@ public class RecordController extends BaseController {
         return dealWithException(project_id, recordService::lists, "RecordController");
     }
 
-    @RequestMapping(value = "/list/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public Response<Boolean> delete(@PathVariable String id) {
         return dealWithException(id, recordService::delete, "RecordController");
     }
