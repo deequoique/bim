@@ -41,7 +41,7 @@ public class ProjectController extends BaseController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public Response<Boolean> createProject(@RequestBody CreateProjectReq req) {
+    public Response<String> createProject(@RequestBody CreateProjectReq req) {
         return dealWithException(req, projectService::create, "ProjectController");
     }
 

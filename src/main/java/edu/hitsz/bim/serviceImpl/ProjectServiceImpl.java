@@ -33,11 +33,12 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
     }
 
     @Override
-    public Boolean create(CreateProjectReq req) {
+    public String create(CreateProjectReq req) {
         Project build = Project.builder().name(req.getName())
                 .userId(req.getUser_id())
                 .build();
-        return this.save(build);
+        this.save(build);
+        return String.valueOf(build.getId());
     }
 
     @Override

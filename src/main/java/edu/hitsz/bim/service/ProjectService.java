@@ -19,7 +19,7 @@ public interface ProjectService extends IService<Project> {
 
     List<Project> findByUser(String userId);
 
-    Boolean create(CreateProjectReq req);
+    String create(CreateProjectReq req);
 
     ProjectVO details(String id);
 

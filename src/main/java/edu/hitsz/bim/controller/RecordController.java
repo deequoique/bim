@@ -35,7 +35,7 @@ public class RecordController extends BaseController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public Response<Boolean> create(@RequestBody CreateRecordReq req) {
+    public Response<String> create(@RequestBody CreateRecordReq req) {
         return dealWithException(req, recordService::create, "RecordController");
     }
 

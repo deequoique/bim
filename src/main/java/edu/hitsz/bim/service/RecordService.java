@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface RecordService extends IService<Record> {
 
-    Boolean create(CreateRecordReq req);
+    String create(CreateRecordReq req);
 
     List<Record> lists(String projectId);
 

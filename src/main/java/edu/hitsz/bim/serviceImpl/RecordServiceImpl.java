@@ -8,6 +8,7 @@ import edu.hitsz.bim.entity.Record;
 import edu.hitsz.bim.mappers.RecordMapper;
 import edu.hitsz.bim.service.RecordService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,17 +23,19 @@ import java.util.Objects;
  * @since 2024-02-02 01:47:27
  */
 @Service
+@Slf4j
 public class RecordServiceImpl extends ServiceImpl<RecordMapper, Record> implements RecordService {
 
     @Override
-    public Boolean create(CreateRecordReq req) {
+    public String create(CreateRecordReq req) {
         Record build = Record.builder().context(req.getContext())
+                .projectId(Integer.valueOf(req.getProject_id()))
                 .result(req.getResult())
                 .time(req.getTime())
                 .staff(req.getStaff())
                 .build();
-
-        return this.save(build);
+        this.save(build);
+        return String.valueOf(build.getId());
     }
 
     @Override
