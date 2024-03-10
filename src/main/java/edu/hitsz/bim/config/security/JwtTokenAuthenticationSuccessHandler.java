@@ -38,6 +38,6 @@ public class JwtTokenAuthenticationSuccessHandler implements AuthenticationSucce
         String token = JWTUtil.createToken(jwtMap, AuthenticationConstants.JWT_KEY.getBytes());
         result.put("token", token);
         // 响应数据
-        ResponseUtils.buildResponse(response, R.response(ResponseEnum.SUCCESS, result), HttpStatus.UNAUTHORIZED);
+        ResponseUtils.buildResponse(response, R.response(ResponseEnum.SUCCESS, result), HttpStatus.OK);
     }
 }
