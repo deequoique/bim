@@ -35,7 +35,7 @@ public class SecurityConfig {
                         .failureHandler(new JsonAuthenticationFailureHandler()))
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .logout(logout -> logout
-                        .logoutUrl("/user/logout")
+                        .logoutUrl("/api/logout")
                         .logoutSuccessHandler(new JsonLogoutSuccessHandler()))
                 .exceptionHandling(h -> h
                         .accessDeniedHandler(new JsonAccessDeniedHandler())
