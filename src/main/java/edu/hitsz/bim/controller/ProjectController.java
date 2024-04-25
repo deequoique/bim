@@ -9,9 +9,14 @@ import edu.hitsz.bim.service.ProjectService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 
@@ -53,5 +58,10 @@ public class ProjectController extends BaseController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public Response<Boolean> delete(@PathVariable String id) {
         return dealWithException(id, projectService::delete, "ProjectController");
+    }
+    @PostMapping("/upload")
+    public Response<String> uploadFile(@RequestParam("file") MultipartFile file) {
+        return dealWithException(file, projectService::upload, "ProjectController");
+
     }
 }
