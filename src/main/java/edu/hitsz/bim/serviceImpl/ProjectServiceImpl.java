@@ -49,6 +49,8 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
     public String create(CreateProjectReq req) {
         Project build = Project.builder().name(req.getName())
                 .userId(req.getUser_id())
+                .location(req.getLocation())
+                .coordinate(req.getCoordinate())
                 .build();
         this.save(build);
         return String.valueOf(build.getId());
@@ -62,7 +64,8 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
         return ProjectVO.builder()
                 .id(project.getId())
                 .name(project.getName())
-                .security(project.getSecurity())
+                .location(project.getLocation())
+                .coordinate(project.getCoordinate())
                 .model(model.getModel())
                 .build();
     }

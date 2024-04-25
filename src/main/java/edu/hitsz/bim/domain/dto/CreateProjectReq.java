@@ -13,4 +13,6 @@ import lombok.Data;
 public class CreateProjectReq {
     private String user_id;
     private String name;
+    private String location;
+    private String coordinate;
 }

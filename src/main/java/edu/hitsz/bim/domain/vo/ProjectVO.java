@@ -13,7 +13,8 @@ import lombok.Data;
 public class ProjectVO {
     private Integer id;
     private String name;
-    private String security;
+    private String location;
+    private String coordinate;
     private String model;
 
 }
