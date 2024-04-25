@@ -1,5 +1,6 @@
 package edu.hitsz.bim.serviceImpl;
 
+import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import edu.hitsz.bim.common.BIMException;
 import edu.hitsz.bim.common.Response;
@@ -13,6 +14,7 @@ import edu.hitsz.bim.service.ProjectModelService;
 import edu.hitsz.bim.service.ProjectService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
+import org.springframework.data.auditing.CurrentDateTimeProvider;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -78,10 +81,10 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
         try {
             // 保存文件到服务器
             byte[] bytes = file.getBytes();
-            Path path = Paths.get(TARGET_FOLDER + file.getOriginalFilename());
+            String filename = DateUtil.current() + file.getOriginalFilename();
+            Path path = Paths.get(TARGET_FOLDER + filename);
             Files.write(path, bytes);
-
-            return file.getOriginalFilename();
+            return filename;
         } catch (Exception e) {
             throw BIMException.build(ResponseEnum.ERROR);
         }
