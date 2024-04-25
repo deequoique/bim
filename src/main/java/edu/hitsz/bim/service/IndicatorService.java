@@ -3,6 +3,7 @@ package edu.hitsz.bim.service;
 import edu.hitsz.bim.domain.dto.CreateIndicatorReq;
 import edu.hitsz.bim.entity.Indicator;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -21,4 +22,6 @@ public interface IndicatorService extends IService<Indicator> {
     List<Indicator> getList(String projectId);
 
     Boolean create(CreateIndicatorReq createIndicatorReq);
+
+    String upload(MultipartFile file, String projectId);
 }

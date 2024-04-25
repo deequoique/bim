@@ -48,6 +48,12 @@ public class Project implements Serializable {
     @TableField("coordinate")
     private String coordinate;
 
+    @TableField("file")
+    private String file;
+
+    @TableField("report")
+    private String report;
+
     @Schema(description ="Time when the project was created")
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private Date createTime;

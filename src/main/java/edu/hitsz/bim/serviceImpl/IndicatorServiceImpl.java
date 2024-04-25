@@ -1,13 +1,23 @@
 package edu.hitsz.bim.serviceImpl;
 
+import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import edu.hitsz.bim.common.BIMException;
+import edu.hitsz.bim.common.ResponseEnum;
 import edu.hitsz.bim.domain.dto.CreateIndicatorReq;
 import edu.hitsz.bim.entity.Indicator;
+import edu.hitsz.bim.entity.Project;
 import edu.hitsz.bim.mappers.IndicatorMapper;
 import edu.hitsz.bim.service.IndicatorService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import edu.hitsz.bim.service.ProjectService;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -20,7 +30,10 @@ import java.util.List;
  */
 @Service
 public class IndicatorServiceImpl extends ServiceImpl<IndicatorMapper, Indicator> implements IndicatorService {
+    private static final String REPORT_FOLDER = "/usr/local/bim/report/";
 
+    @Resource
+    private ProjectService projectService;
     @Override
     public Boolean delete(String s) {
         return this.removeById(s);
@@ -38,5 +51,25 @@ public class IndicatorServiceImpl extends ServiceImpl<IndicatorMapper, Indicator
                 .projectId(createIndicatorReq.getProject_id())
                 .weight(createIndicatorReq.getWeight()).build();
         return this.save(build);
+    }
+
+    @Override
+    public String upload(MultipartFile file, String projectId) {
+        if (file.isEmpty()) {
+            throw BIMException.build(ResponseEnum.NOT_FOUND);
+        }
+        try {
+            // 保存文件到服务器
+            byte[] bytes = file.getBytes();
+            String filename = DateUtil.current() + file.getOriginalFilename();
+            Path path = Paths.get(REPORT_FOLDER + filename);
+            Files.write(path, bytes);
+            Project project = projectService.getById(projectId);
+            project.setReport(filename);
+            projectService.updateById(project);
+            return filename;
+        } catch (Exception e) {
+            throw BIMException.build(ResponseEnum.ERROR);
+        }
     }
 }
