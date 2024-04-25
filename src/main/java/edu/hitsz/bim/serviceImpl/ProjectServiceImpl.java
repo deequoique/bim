@@ -33,7 +33,7 @@ import java.util.List;
 @Service
 public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> implements ProjectService {
 
-    private static final String TARGET_FOLDER = "/usr/local/bim/directory";
+    private static final String TARGET_FOLDER = "/usr/local/bim/directory/";
     @Resource
     private ProjectModelService projectModelService;
 
