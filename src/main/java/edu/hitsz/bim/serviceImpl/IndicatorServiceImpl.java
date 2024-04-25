@@ -19,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * <p>
@@ -65,6 +66,10 @@ public class IndicatorServiceImpl extends ServiceImpl<IndicatorMapper, Indicator
             Path path = Paths.get(REPORT_FOLDER + filename);
             Files.write(path, bytes);
             Project project = projectService.getById(projectId);
+            if (Objects.isNull(project)) {
+                log.warn("projectID:" + projectId);
+                throw BIMException.build(ResponseEnum.DB_ERROR);
+            }
             project.setReport(filename);
             projectService.updateById(project);
             return filename;
