@@ -10,11 +10,8 @@ import edu.hitsz.bim.service.IndicatorService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
@@ -27,7 +24,7 @@ import java.util.List;
  * @since 2024-04-25 08:59:42
  */
 @Slf4j
-@Controller
+@RestController
 @RequestMapping("/api/indicator")
 public class IndicatorController extends BaseController {
     @Resource
