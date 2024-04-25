@@ -35,7 +35,7 @@ public class IndicatorServiceImpl extends ServiceImpl<IndicatorMapper, Indicator
     public Boolean create(CreateIndicatorReq createIndicatorReq) {
         Indicator build = Indicator.builder()
                 .name(createIndicatorReq.getName())
-                .projectId(createIndicatorReq.getProjectId())
+                .projectId(createIndicatorReq.getProject_id())
                 .weight(createIndicatorReq.getWeight()).build();
         return this.save(build);
     }

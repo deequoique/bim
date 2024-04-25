@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 @Builder
 public class CreateIndicatorReq {
-    private Integer projectId;
+    private Integer project_id;
     private String name;
     private String weight;
 }
