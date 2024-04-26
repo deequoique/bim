@@ -49,7 +49,7 @@ public class IndicatorController extends BaseController {
     }
 
     @PostMapping("/value")
-    public Response<Boolean> valueList(@RequestParam("req") List<ValueIndicatorReq> req) {
+    public Response<Boolean> valueList(@RequestBody List<ValueIndicatorReq> req) {
         return dealWithException(req,indicatorService::valueList, "ProjectController");
 
     }
