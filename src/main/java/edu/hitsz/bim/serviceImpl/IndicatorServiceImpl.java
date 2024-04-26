@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import edu.hitsz.bim.common.BIMException;
 import edu.hitsz.bim.common.ResponseEnum;
 import edu.hitsz.bim.domain.dto.CreateIndicatorReq;
+import edu.hitsz.bim.domain.dto.ValueIndicatorReq;
 import edu.hitsz.bim.entity.Indicator;
 import edu.hitsz.bim.entity.Project;
 import edu.hitsz.bim.mappers.IndicatorMapper;
@@ -76,5 +77,15 @@ public class IndicatorServiceImpl extends ServiceImpl<IndicatorMapper, Indicator
         } catch (Exception e) {
             throw BIMException.build(ResponseEnum.ERROR);
         }
+    }
+
+    @Override
+    public Boolean valueList(List<ValueIndicatorReq> reqs) {
+        for (ValueIndicatorReq r: reqs) {
+            Indicator indicator = this.getById(r.getId());
+            indicator.setValue(r.getValue());
+            this.updateById(indicator);
+        }
+        return true;
     }
 }

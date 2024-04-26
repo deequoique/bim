@@ -3,6 +3,7 @@ package edu.hitsz.bim.controller;
 import edu.hitsz.bim.common.BaseController;
 import edu.hitsz.bim.common.Response;
 import edu.hitsz.bim.domain.dto.CreateIndicatorReq;
+import edu.hitsz.bim.domain.dto.ValueIndicatorReq;
 import edu.hitsz.bim.entity.Indicator;
 import edu.hitsz.bim.service.IndicatorService;
 import jakarta.annotation.Resource;
@@ -47,6 +48,11 @@ public class IndicatorController extends BaseController {
         return dealWithException(id, indicatorService::delete, "IndicatorController");
     }
 
+    @PostMapping("/value")
+    public Response<Boolean> valueList(@RequestParam("req") List<ValueIndicatorReq> req) {
+        return dealWithException(req,indicatorService::valueList, "ProjectController");
+
+    }
     @PostMapping("/upload")
     public Response<String> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("project_id") String project_id) {
         return dealWithException(file, unused -> indicatorService.upload(file, project_id), "ProjectController");
