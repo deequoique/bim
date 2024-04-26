@@ -6,7 +6,8 @@ import edu.hitsz.bim.domain.dto.CreateProjectReq;
 import edu.hitsz.bim.domain.vo.ProjectVO;
 import edu.hitsz.bim.entity.Project;
 import edu.hitsz.bim.service.ProjectService;
-import jakarta.annotation.Resource;
+import org.springframework.core.io.Resource;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/project")
 public class ProjectController extends BaseController {
-    @Resource
+    @jakarta.annotation.Resource
     private ProjectService projectService;
 
     @Override
@@ -59,9 +60,15 @@ public class ProjectController extends BaseController {
     public Response<Boolean> delete(@PathVariable String id) {
         return dealWithException(id, projectService::delete, "ProjectController");
     }
+
     @PostMapping("/upload")
     public Response<String> uploadFile(@RequestParam("file") MultipartFile file) {
         return dealWithException(file, projectService::upload, "ProjectController");
 
+    }
+
+    @GetMapping("/download/report/{project_id}")
+    public ResponseEntity<Resource> downloadReport(HttpServletResponse response, @PathVariable String project_id) {
+        return projectService.downloadReport(response, project_id);
     }
 }

@@ -4,6 +4,9 @@ import edu.hitsz.bim.domain.dto.CreateProjectReq;
 import edu.hitsz.bim.domain.vo.ProjectVO;
 import edu.hitsz.bim.entity.Project;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.core.io.Resource;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -26,5 +29,11 @@ public interface ProjectService extends IService<Project> {
 
     Boolean delete(String id);
 
+    void deleteReport(String name);
+
+    void deleteDirectory(String name);
+
     String upload(MultipartFile file);
+
+    ResponseEntity<Resource> downloadReport(HttpServletResponse response, String projectId);
 }
