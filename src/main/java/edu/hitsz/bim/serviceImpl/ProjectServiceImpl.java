@@ -12,6 +12,7 @@ import edu.hitsz.bim.mappers.ProjectMapper;
 import edu.hitsz.bim.service.ProjectModelService;
 import edu.hitsz.bim.service.ProjectService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.core.io.UrlResource;
@@ -37,6 +38,7 @@ import java.util.List;
  * @since 2024-02-02 01:47:27
  */
 @Service
+@Slf4j
 public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> implements ProjectService {
     private static final String REPORT_FOLDER = "/usr/local/bim/report/";
 
@@ -130,7 +132,7 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
     @Override
     public ResponseEntity<Resource> downloadReport(HttpServletResponse response, String projectId) {
         Path path = Paths.get(REPORT_FOLDER + this.getById(projectId).getReport());
-
+        log.info(path.toString());
         Resource resource = null;
         try {
             resource = new UrlResource(path.toUri());
