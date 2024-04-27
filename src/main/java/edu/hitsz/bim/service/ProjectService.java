@@ -39,4 +39,6 @@ public interface ProjectService extends IService<Project> {
     ResponseEntity<Resource> downloadReport(HttpServletResponse response, String projectId);
 
     Boolean securityResult(SecurityReq req);
+
+    Boolean deleteReportById(String projectId);
 }

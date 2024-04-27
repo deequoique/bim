@@ -101,7 +101,7 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
         try {
             Files.delete(path);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw BIMException.build(ResponseEnum.ERROR);
         }
     }
 
@@ -174,5 +174,15 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
         Project project = this.getById(req.getId());
         project.setResult(req.getResult());
         return this.updateById(project);
+    }
+
+    @Override
+    public Boolean deleteReportById(String projectId) {
+        Project project = this.getById(projectId);
+        String report = project.getReport();
+        deleteReport(report);
+        project.setReport("");
+        this.updateById(project);
+        return true;
     }
 }

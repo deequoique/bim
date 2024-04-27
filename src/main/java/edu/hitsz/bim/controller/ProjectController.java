@@ -78,4 +78,9 @@ public class ProjectController extends BaseController {
     public Response<Boolean> updateProject(@RequestBody Project project) {
         return dealWithException(project, projectService::updateById, "ProjectController");
     }
+
+    @RequestMapping(value = "/delete/report/{id}", method = RequestMethod.GET)
+    public Response<Boolean> deleteReport(@PathVariable String id) {
+        return dealWithException(id, projectService::deleteReportById, "ProjectController");
+    }
 }
