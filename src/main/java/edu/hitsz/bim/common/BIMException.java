@@ -28,14 +28,14 @@ public class BIMException extends  RuntimeException{
     }
 
     public static BIMException build(Integer code, String msg) {
-        BIMException BIMException = new BIMException();
-        BIMException.setCode(code);
-        BIMException.setMsg(msg);
+        BIMException bimException = new BIMException();
+        bimException.setCode(code);
+        bimException.setMsg(msg);
         // error log
         if (ResponseEnum.ERROR.getCode().equals(code)) {
             LogUtil.error(msg);
         }
-        return BIMException;
+        return bimException;
     }
 
     public static BIMException build(ResponseEnum responseEnum) {

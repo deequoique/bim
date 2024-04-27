@@ -75,7 +75,7 @@ public class IndicatorServiceImpl extends ServiceImpl<IndicatorMapper, Indicator
             projectService.updateById(project);
             return filename;
         } catch (Exception e) {
-            throw BIMException.build(ResponseEnum.ERROR);
+            throw BIMException.build(ResponseEnum.ERROR, e.getMessage());
         }
     }
 

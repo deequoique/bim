@@ -145,6 +145,7 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
         }
         // 确保文件存在
         if (resource.exists() || resource.isReadable()) {
+            log.info(resource.getFilename());
             // 设置内容类型和头信息
             String contentType = null;
             try {
@@ -156,7 +157,8 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
             encodedFileName = URLEncoder.encode(Objects.requireNonNull(resource.getFilename()), StandardCharsets.UTF_8).replace("+", "%20");
 
             HttpHeaders headers = new HttpHeaders();
-            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename*=UTF-8''" + encodedFileName);
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + encodedFileName);
+            log.info(encodedFileName);
 
             return ResponseEntity.ok()
                     .contentType(MediaType.parseMediaType(contentType))
