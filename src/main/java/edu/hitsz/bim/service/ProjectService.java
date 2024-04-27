@@ -1,6 +1,7 @@
 package edu.hitsz.bim.service;
 
 import edu.hitsz.bim.domain.dto.CreateProjectReq;
+import edu.hitsz.bim.domain.dto.SecurityReq;
 import edu.hitsz.bim.domain.vo.ProjectVO;
 import edu.hitsz.bim.entity.Project;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -36,4 +37,6 @@ public interface ProjectService extends IService<Project> {
     String upload(MultipartFile file);
 
     ResponseEntity<Resource> downloadReport(HttpServletResponse response, String projectId);
+
+    Boolean securityResult(SecurityReq req);
 }

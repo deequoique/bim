@@ -3,6 +3,7 @@ package edu.hitsz.bim.controller;
 import edu.hitsz.bim.common.BaseController;
 import edu.hitsz.bim.common.Response;
 import edu.hitsz.bim.domain.dto.CreateProjectReq;
+import edu.hitsz.bim.domain.dto.SecurityReq;
 import edu.hitsz.bim.domain.vo.ProjectVO;
 import edu.hitsz.bim.entity.Project;
 import edu.hitsz.bim.service.ProjectService;
@@ -11,13 +12,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 
@@ -70,5 +67,15 @@ public class ProjectController extends BaseController {
     @GetMapping("/download/report/{project_id}")
     public ResponseEntity<Resource> downloadReport(HttpServletResponse response, @PathVariable String project_id) {
         return projectService.downloadReport(response, project_id);
+    }
+
+    @PostMapping("/result")
+    public Response<Boolean> securityResult(@RequestBody SecurityReq req) {
+        return dealWithException(req,projectService::securityResult,"ProjectController");
+    }
+
+    @PostMapping("/update")
+    public Response<Boolean> updateProject(@RequestBody Project project) {
+        return dealWithException(project, projectService::updateById, "ProjectController");
     }
 }

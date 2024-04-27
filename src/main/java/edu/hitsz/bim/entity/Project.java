@@ -54,6 +54,9 @@ public class Project implements Serializable {
     @TableField("report")
     private String report;
 
+    @TableField("result")
+    private String result;
+
     @Schema(description ="Time when the project was created")
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private Date createTime;

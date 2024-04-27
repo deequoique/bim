@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import edu.hitsz.bim.common.BIMException;
 import edu.hitsz.bim.common.ResponseEnum;
 import edu.hitsz.bim.domain.dto.CreateProjectReq;
+import edu.hitsz.bim.domain.dto.SecurityReq;
 import edu.hitsz.bim.domain.vo.ProjectVO;
 import edu.hitsz.bim.entity.Project;
 import edu.hitsz.bim.entity.ProjectModel;
@@ -23,7 +24,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -167,5 +167,12 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
         } else {
             throw new RuntimeException("Could not read the file!");
         }
+    }
+
+    @Override
+    public Boolean securityResult(SecurityReq req) {
+        Project project = this.getById(req.getId());
+        project.setResult(req.getResult());
+        return this.updateById(project);
     }
 }
