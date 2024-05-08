@@ -88,7 +88,7 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
             deleteReport(report);
         }
         String directory = project.getFile();
-        if (!directory.isEmpty()) {
+        if (directory != null && !directory.isEmpty()) {
             deleteDirectory(directory);
         }
         return this.removeById(id);
