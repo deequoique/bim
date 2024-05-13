@@ -77,6 +77,7 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
                 .location(project.getLocation())
                 .coordinate(project.getCoordinate())
                 .model(model.getModel())
+                .assetId(project.getAssetId())
                 .build();
     }
 

@@ -16,5 +16,6 @@ public class ProjectVO {
     private String location;
     private String coordinate;
     private String model;
+    private String assetId;
 
 }
