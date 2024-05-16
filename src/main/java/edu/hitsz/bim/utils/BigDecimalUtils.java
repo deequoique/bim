@@ -1,6 +1,7 @@
 package edu.hitsz.bim.utils;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class BigDecimalUtils {
 
@@ -29,7 +30,7 @@ public class BigDecimalUtils {
         return value1.subtract(value2);
     }
     public static BigDecimal divide(String valueStr1, String valueStr2){
-        return fromStr(valueStr1).divide(fromStr(valueStr2));
+        return fromStr(valueStr1).divide(fromStr(valueStr2), 2, RoundingMode.HALF_UP);
     }
     public static BigDecimal divide(BigDecimal value1, BigDecimal value2) {
         return value1.divide(value2);
