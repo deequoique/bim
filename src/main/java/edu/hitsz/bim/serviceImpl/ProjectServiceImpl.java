@@ -85,7 +85,7 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
     public Boolean delete(String id) {
         Project project = this.getById(id);
         String report = project.getReport();
-        if (!report.isEmpty()) {
+        if (report != null && !report.isEmpty()) {
             deleteReport(report);
         }
         String directory = project.getFile();
