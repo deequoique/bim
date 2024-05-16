@@ -83,7 +83,7 @@ public class IndicatorServiceImpl extends ServiceImpl<IndicatorMapper, Indicator
 
     @Override
     public Boolean valueList(List<ValueIndicatorReq> reqs) {
-        Integer projectId = this.getById(reqs.get(0).getId()).getProjectId();
+        Integer projectId = this.getById(reqs.get(1).getId()).getProjectId();
         List<Indicator> indicatorList = this.getList(String.valueOf(projectId));
         String totalWeight = "";
         for (Indicator i : indicatorList) {
