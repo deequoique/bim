@@ -88,20 +88,24 @@ public class IndicatorServiceImpl extends ServiceImpl<IndicatorMapper, Indicator
         }
         Integer projectId = this.getById(reqs.get(0).getId()).getProjectId();
         List<Indicator> indicatorList = this.getList(String.valueOf(projectId));
+
+        for (ValueIndicatorReq r: reqs) {
+            Indicator indicator = this.getById(r.getId());
+            indicator.setValue(r.getValue());
+            this.updateById(indicator);
+        }
+
         String totalWeight = "0";
         for (Indicator i : indicatorList) {
             BigDecimal add = BigDecimalUtils.add(totalWeight, i.getWeight());
             totalWeight = add.toString();
         }
         String totalValue = "0";
-        for (ValueIndicatorReq r: reqs) {
-            Indicator indicator = this.getById(r.getId());
-            indicator.setValue(r.getValue());
-            BigDecimal weight = BigDecimalUtils.divide(indicator.getWeight(), totalWeight);
-            BigDecimal wValue = BigDecimalUtils.multiply(weight.toString(), r.getValue());
+        for (Indicator i : indicatorList) {
+            BigDecimal weight = BigDecimalUtils.divide(i.getWeight(), totalWeight);
+            BigDecimal wValue = BigDecimalUtils.multiply(weight.toString(), i.getValue());
             BigDecimal addValue = BigDecimalUtils.add(totalValue, wValue.toString());
             totalValue = addValue.toString();
-            this.updateById(indicator);
         }
         Project project = projectService.getById(projectId);
         project.setResult(totalValue);
