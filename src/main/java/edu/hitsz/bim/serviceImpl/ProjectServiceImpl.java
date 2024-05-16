@@ -186,4 +186,11 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
         this.updateById(project);
         return true;
     }
+
+    @Override
+    public Boolean setAssetId(String projectId, String assetId) {
+        Project project = this.getById(projectId);
+        project.setAssetId(assetId);
+        return this.updateById(project);
+    }
 }

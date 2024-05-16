@@ -41,4 +41,6 @@ public interface ProjectService extends IService<Project> {
     Boolean securityResult(SecurityReq req);
 
     Boolean deleteReportById(String projectId);
+
+    Boolean setAssetId(String projectId, String assetId);
 }

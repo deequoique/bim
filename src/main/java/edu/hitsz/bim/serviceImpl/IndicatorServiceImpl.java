@@ -12,10 +12,12 @@ import edu.hitsz.bim.mappers.IndicatorMapper;
 import edu.hitsz.bim.service.IndicatorService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import edu.hitsz.bim.service.ProjectService;
+import edu.hitsz.bim.utils.BigDecimalUtils;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -81,11 +83,26 @@ public class IndicatorServiceImpl extends ServiceImpl<IndicatorMapper, Indicator
 
     @Override
     public Boolean valueList(List<ValueIndicatorReq> reqs) {
+        Integer projectId = this.getById(reqs.get(0).getId()).getProjectId();
+        List<Indicator> indicatorList = this.getList(String.valueOf(projectId));
+        String totalWeight = "";
+        for (Indicator i : indicatorList) {
+            BigDecimal add = BigDecimalUtils.add(totalWeight, i.getWeight());
+            totalWeight = add.toString();
+        }
+        String totalValue = "";
         for (ValueIndicatorReq r: reqs) {
             Indicator indicator = this.getById(r.getId());
             indicator.setValue(r.getValue());
+            BigDecimal weight = BigDecimalUtils.divide(indicator.getWeight(), totalWeight);
+            BigDecimal wValue = BigDecimalUtils.multiply(weight.toString(), r.getValue());
+            BigDecimal addValue = BigDecimalUtils.add(totalValue, wValue.toString());
+            totalValue = addValue.toString();
             this.updateById(indicator);
         }
+        Project project = projectService.getById(projectId);
+        project.setResult(totalValue);
+        projectService.updateById(project);
         return true;
     }
 }
